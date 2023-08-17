@@ -1,11 +1,15 @@
+import ShareBio from "../ShareBio";
+import { useState, createContext, useContext } from "react";
 
 
+const BioLabel = (props: any) => {
 
-const BioLabel = (data:any) => {
+
     return (
         <div className="pt-5 text-center">
-            <p>{data.data.fullname}</p>
-            <p>{data.data.bio}</p>
+            <p>{props.data.fullname}</p>
+            <p>{props.data.bio}</p>
+            <p></p>
         </div>
     );
 }
