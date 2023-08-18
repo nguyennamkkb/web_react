@@ -1,9 +1,12 @@
 import { combineReducers } from "redux";
 
-import counterReducer from "../reducers/counterReducer";
+import counter from "./counter";
+import infoApp from './infoApp'
 
 const allReducers = combineReducers({
-  counterReducer,
+  infoApp: infoApp,
+  counter: counter,
+
   // add more reducers here
 });
 export default allReducers

@@ -1,14 +1,14 @@
-import ShareBio from "view/home/ShareBio";
+import {Outlet } from 'react-router-dom';
 
 
 
-function App() {
+const App = () => {
   return (
     <div className="bg-gradient-to-b from-violet-500 to-fuchsia-500 h-screen">
-       <ShareBio></ShareBio>
+       <Outlet />
     </div>
-   
-  )
-}
+    
+  );
+};
 
 export default App

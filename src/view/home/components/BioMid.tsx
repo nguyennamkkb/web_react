@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from "../../../plugin/actions/counter";
+import { increment, decrement } from "../../../plugin/store/actions/counter";
+import { setTitle } from "../../../plugin/store/actions/infoApp";
 
 
 const BioMid = () => {
-  const counterReducer = useSelector((state:any) => state.counter);
+
+
   const dispatch = useDispatch();
   return (
     <div className="container mx-auto   rounded-b-lg  text-white  ">
@@ -30,9 +32,10 @@ const BioMid = () => {
         </div>
       </div>
       <div>
-        <h1>Counter {counterReducer}</h1>
-        <button onClick={() => dispatch(increment(5))}>Increment</button>
-        <button onClick={() => dispatch(decrement(5))}>Decrement</button>
+        
+        <button onClick={() => dispatch(increment(3))}>Increment</button>
+        <button onClick={() => dispatch(decrement(4))}>Decrement</button>
+        <button onClick={() => dispatch(setTitle({title:"Nasdasd",theme:"2"}))}>setTitle</button>
       </div>
     </div>
   )

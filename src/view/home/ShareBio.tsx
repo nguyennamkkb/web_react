@@ -1,13 +1,15 @@
 import { useState, createContext, useContext } from "react";
-
 import BioHead from './components/BioHead'
 import BioMid from './components/BioMid'
+import { useParams } from "react-router-dom";
 
 const ShareBio = () => {
     const [count, setCount] = useState(0);
     const handleResult = (d: any) => {
         setCount(d);
-      };
+    };
+    let { id } = useParams();
+    
     return (
         <div>
             <div>
@@ -15,10 +17,11 @@ const ShareBio = () => {
                 <BioHead data={count} onResult={handleResult}></BioHead>
             </div>
             <div>
-                <BioMid></BioMid>
+                <BioMid/>
             </div>
         </div>
     )
 }
 
 export default ShareBio
+
