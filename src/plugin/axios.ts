@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookie from './cookie'
 
 const baseDomain = 'http://127.0.0.1:4444/'
 const baseUrl = `${baseDomain}ln-bio-api` // or `${baseDomain}/api/v1`
@@ -6,16 +7,14 @@ const baseUrl = `${baseDomain}ln-bio-api` // or `${baseDomain}/api/v1`
 const service = axios.create({
   baseURL: baseUrl, // api 的 base_url
   timeout: 5000, // request timeout
-  headers: {
-    Authorization: 'Bearer {token}'
-  }
 })
 let authToken: string = ''
 
 // Set the Authorization header for all requests
 service.interceptors.request.use((config: any) => {
-  if (authToken) {
-    config.headers.Authorization = `Bearer ${authToken}`
+  const token  =  Cookie.share.getToken()
+  if (token!= "" && token != null && token.length >=32) {
+    config.headers.Authorization = `Bearer ${token}`
   }
   return config
 })
@@ -38,21 +37,23 @@ const authRepository = {
           password
         })
         .then((result: any) => {
+          console.log(result)
           if (
             result.data.data != null &&
             result.data.data.access_token != null
           ) {
             authToken = result.data.data.access_token // Save the token
-            // getters.value.token = authToken
-
+            Cookie.share.setToken(authToken)
             status = true // Login successful
           }
         })
         .catch((err: any) => {
+          Cookie.share.setToken("")
           status = false // Login failed
         })
       return status
     } catch (error) {
+      Cookie.share.setToken("")
       console.error('Login error:', error)
       return false // Login failed
     }

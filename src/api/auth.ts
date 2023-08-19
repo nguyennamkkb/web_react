@@ -4,4 +4,5 @@ export default {
     login(username: string, password: string){
         return authRepository.login(username,password);
     }
+    // checkUser()
 }
